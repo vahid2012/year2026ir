@@ -1,0 +1,133 @@
+---
+import '@/styles/globals.css';
+import Layout from '@/layouts/Layout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { TOURS, BLOGS, SITE, LINKS } from '@/lib/site';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Faq from '@/components/Faq.astro';
+import Cta from '@/components/Cta.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'blog'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const d = entry.data;
+
+const postLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: d.title,
+  description: d.description,
+  image: d.image,
+  url: `${SITE.domain}/blog/${entry.slug}`,
+  datePublished: d.publishDate,
+  dateModified: d.publishDate,
+  inLanguage: 'fa-IR',
+  author: { '@type': 'Organization', name: SITE.legalName, url: SITE.domain },
+  publisher: { '@type': 'Organization', name: SITE.legalName, url: SITE.domain },
+  keywords: d.keywords.join(', '),
+};
+
+const breadLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'خانه', item: SITE.domain },
+    { '@type': 'ListItem', position: 2, name: 'راهنمای سفر', item: `${SITE.domain}/blog` },
+    { '@type': 'ListItem', position: 3, name: d.title, item: `${SITE.domain}/blog/${entry.slug}` },
+  ],
+};
+---
+
+<Layout
+  title={d.title}
+  description={d.description}
+  canonical={`/blog/${entry.slug}`}
+  image={d.image}
+  type="article"
+  jsonLd={[postLd, breadLd]}
+>
+  <Breadcrumbs items={[{ name: 'خانه', path: '/' }, { name: 'راهنمای سفر', path: '/blog' }, { name: d.title }]} />
+
+  <article>
+    <!-- Hero -->
+    <section class="relative overflow-hidden">
+      <div class="absolute inset-0">
+        <img src={d.image} alt={d.imageAlt} width="940" height="650" class="h-full w-full object-cover" loading="eager" />
+        <div class="absolute inset-0 bg-gradient-to-t from-secondary/95 via-secondary/65 to-secondary/30"></div>
+      </div>
+      <div class="relative container-fa py-20 md:py-28 text-white">
+        <div class="flex items-center gap-3 text-sm text-white/80 mb-4">
+          <span>{d.date}</span>
+          <span>•</span>
+          <span>{d.readTime}</span>
+        </div>
+        <h1 class="text-3xl md:text-5xl font-extrabold mb-4 max-w-3xl">{d.title}</h1>
+        <p class="text-lg text-white/90 max-w-2xl leading-8">{d.excerpt}</p>
+      </div>
+    </section>
+
+    <!-- Body + sidebar -->
+    <div class="container-fa py-10 grid gap-10 lg:grid-cols-[1fr_280px]">
+      <div class="prose-fa max-w-none">
+        <Content />
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="space-y-6 lg:sticky lg:top-24 self-start">
+        <div class="card-fa p-5">
+          <h3 class="font-bold mb-3">اطلاعات مقاله</h3>
+          <ul class="text-sm space-y-2 text-muted-foreground">
+            <li>تاریخ: <span class="text-foreground font-semibold">{d.date}</span></li>
+            <li>زمان مطالعه: <span class="text-foreground font-semibold">{d.readTime}</span></li>
+          </ul>
+        </div>
+
+        {d.relatedTours.length > 0 && (
+          <div class="card-fa p-5">
+            <h3 class="font-bold mb-3">تورهای مرتبط</h3>
+            <ul class="text-sm space-y-2">
+              {d.relatedTours.map((slug) => {
+                const t = TOURS.find((x) => x.slug === slug);
+                return t && <li><a href={`/tours/${t.slug}`} class="link-fa">{t.shortTitle}</a></li>;
+              })}
+            </ul>
+          </div>
+        )}
+
+        {d.relatedBlogs.length > 0 && (
+          <div class="card-fa p-5">
+            <h3 class="font-bold mb-3">مقالات مرتبط</h3>
+            <ul class="text-sm space-y-2">
+              {d.relatedBlogs.map((slug) => {
+                const b = BLOGS.find((x) => x.slug === slug);
+                return b && <li><a href={`/blog/${b.slug}`} class="link-fa">{b.title}</a></li>;
+              })}
+            </ul>
+          </div>
+        )}
+
+        <div class="card-fa p-5 bg-gradient-to-br from-primary to-accent text-primary-foreground">
+          <h3 class="font-bold mb-2">رزرو تور</h3>
+          <p class="text-sm text-primary-foreground/90 mb-3">برای رزرو تور با آکای تراول تماس بگیرید.</p>
+          <a href={LINKS.whatsapp} target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full bg-white text-primary px-4 py-2 text-sm font-bold">واتساپ ۰۹۱۴۳۴۰۳۴۳۱</a>
+        </div>
+      </aside>
+    </div>
+
+    <!-- FAQ -->
+    <Faq faqs={d.faqs} pageUrl={`/blog/${entry.slug}`} />
+  </article>
+
+  <Cta compact />
+</Layout>

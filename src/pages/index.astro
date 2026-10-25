@@ -1,0 +1,106 @@
+---
+import '@/styles/globals.css';
+import Layout from '@/layouts/Layout.astro';
+import { TOURS, BLOGS, SITE, LINKS } from '@/lib/site';
+import TourCards from '@/components/TourCards.astro';
+import BlogCards from '@/components/BlogCards.astro';
+import Cta from '@/components/Cta.astro';
+
+const heroImg = 'https://images.pexels.com/photos/16206879/pexels-photo-16206879.jpeg?auto=compress&cs=tinysrgb&h=650&w=940';
+
+const homeLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE.legalName,
+  url: SITE.domain,
+  inLanguage: 'fa-IR',
+};
+---
+
+<Layout
+  title={`آکای تراول | ${SITE.legalName}`}
+  description={SITE.description}
+  canonical="/"
+  image={heroImg}
+  jsonLd={homeLd}
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0">
+      <img src={heroImg} alt="منظره شهر ایروان با کوه آرارات" width="940" height="650" class="h-full w-full object-cover" loading="eager" />
+      <div class="absolute inset-0 bg-gradient-to-l from-secondary/90 via-secondary/75 to-secondary/60"></div>
+    </div>
+    <div class="relative container-fa py-24 md:py-36 text-white">
+      <div class="max-w-2xl animate-fade-up">
+        <span class="inline-block rounded-full bg-primary/90 px-4 py-1 text-sm font-bold mb-4">آژانس گردشگری آکای تراول</span>
+        <h1 class="text-3xl md:text-5xl font-extrabold leading-tight mb-5">
+          تورهای رویدادهای ویژه ارمنستان
+        </h1>
+        <p class="text-lg md:text-xl text-white/90 leading-8 mb-8">
+          از کریسمس حواریون در اچمیادزین تا نبرد آب وارداوار و پرواز بادکنک بر فراز ایروان؛ با راهنمای فارسی‌زبان آکای تراول، فرهنگ و شادی ارمنستان را تجربه کنید.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href="/tours" class="btn-primary-fa">مشاهده تورها</a>
+          <a href={LINKS.whatsapp} target="_blank" rel="noopener" class="btn-secondary-fa">رزرو در واتساپ</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="container-fa py-14">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="section-title mb-4">سفرهای فراموش‌نشدنی به قلب ارمنستان</h2>
+      <p class="text-muted-foreground leading-8">
+        آکای تراول با سال‌ها تجربه در تورهای ارمنستان، برنامه‌های ویژه‌ای برای رویدادهای فرهنگی و مذهبی این کشور طراحی کرده است. راهنمای فارسی‌زبان، هتل مرکزی و رزرو همه‌چیز از قبل، سفری بی‌دردسر و پر از خاطره برای شما می‌سازیم.
+      </p>
+    </div>
+  </section>
+
+  <!-- Tours -->
+  <section class="container-fa pb-14">
+    <div class="flex items-end justify-between mb-8">
+      <h2 class="section-title">تورهای ویژه ارمنستان</h2>
+      <a href="/tours" class="text-primary font-bold hover:underline">همه تورها ←</a>
+    </div>
+    <TourCards limit={6} />
+  </section>
+
+  <!-- Blog preview -->
+  <section class="bg-muted/40 py-14">
+    <div class="container-fa">
+      <div class="flex items-end justify-between mb-8">
+        <h2 class="section-title">راهنمای سفر به ارمنستان</h2>
+        <a href="/blog" class="text-primary font-bold hover:underline">همه مقالات ←</a>
+      </div>
+      <BlogCards limit={6} />
+    </div>
+  </section>
+
+  <!-- About teaser -->
+  <section class="container-fa py-14">
+    <div class="grid gap-8 md:grid-cols-2 items-center">
+      <div>
+        <h2 class="section-title mb-4">چرا آکای تراول؟</h2>
+        <p class="text-muted-foreground leading-8 mb-4">
+          ما متخصص تورهای رویدادهای ویژه ارمنستان هستیم. تفاوت ما در آن است که برنامه‌ها را بر اساس تجربه‌ی واقعی یک ایرانی در ایروان طراحی می‌کنیم. راهنمای فارسی‌زبان همراه شماست و همه‌چیز از پرواز تا هتل و بلیت رویدادها از قبل رزرو می‌شود.
+        </p>
+        <ul class="space-y-2 text-muted-foreground">
+          <li class="flex items-center gap-2"><span class="text-primary">✓</span> راهنمای فارسی‌زبان همراه</li>
+          <li class="flex items-center gap-2"><span class="text-primary">✓</span> هتل مرکزی و انتقال اختصاصی</li>
+          <li class="flex items-center gap-2"><span class="text-primary">✓</span> رزرو بلیت رویدادها از قبل</li>
+          <li class="flex items-center gap-2"><span class="text-primary">✓</span> پشتیبانی ۲۴ ساعته در سفر</li>
+        </ul>
+        <div class="mt-6 flex gap-3">
+          <a href="/about" class="btn-secondary-fa">درباره ما</a>
+          <a href="/contact" class="btn-primary-fa">تماس با ما</a>
+        </div>
+      </div>
+      <div class="rounded-2xl overflow-hidden shadow-xl">
+        <img src="https://images.pexels.com/photos/11885429/pexels-photo-11885429.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="صومعه تاریخی ارمنستان در کوهستان" width="940" height="650" class="h-full w-full object-cover" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <Cta />
+</Layout>

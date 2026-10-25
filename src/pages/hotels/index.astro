@@ -1,0 +1,135 @@
+---
+import '@/styles/globals.css';
+import Layout from '@/layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { HOTELS, TOURS, SITE, LINKS } from '@/lib/site';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Cta from '@/components/Cta.astro';
+
+const hotels = await getCollection('hotels');
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'رزرو هتل در ارمنستان',
+  url: `${SITE.domain}/hotels`,
+  inLanguage: 'fa-IR',
+  hasPart: HOTELS.map((h) => ({
+    '@type': 'Hotel',
+    name: h.title,
+    url: `${SITE.domain}/hotels/${h.slug}`,
+  })),
+};
+
+---
+
+<Layout
+  title="رزرو هتل در ارمنستان | هتل‌های ایروان"
+  description="راهنمای کامل رزرو هتل در ایروان ارمنستان؛ معرفی بهترین هتل‌های ۴ و ۵ ستاره به تفکیک منطقه، قیمت، امکانات و فاصله تا جاذبه‌های گردشگری."
+  canonical="/hotels"
+  image="https://images.pexels.com/photos/14036253/pexels-photo-14036253.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+  jsonLd={ld}
+>
+  <Breadcrumbs items={[{ name: 'خانه', path: '/' }, { name: 'هتل‌ها' }]} />
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="https://images.pexels.com/photos/14036253/pexels-photo-14036253.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="لابی لوکس هتل در ایروان" width="940" height="650" class="h-full w-full object-cover" loading="eager" />
+      <div class="absolute inset-0 bg-gradient-to-t from-secondary/95 via-secondary/70 to-secondary/30"></div>
+    </div>
+    <div class="relative container-fa py-20 md:py-28 text-white">
+      <h1 class="text-3xl md:text-5xl font-extrabold mb-4 max-w-3xl">رزرو هتل در ارمنستان</h1>
+      <p class="text-lg text-white/90 max-w-2xl leading-8">
+        راهنمای کامل هتل‌های ایروان؛ از لوکس‌ترین هتل ۵ ستاره میدان جمهوریه تا بوتیک‌هتل‌های سنتی نزدیک ورنیساژ. قیمت، امکانات، فاصله تا جاذبه‌ها و توصیه‌های آکای تراول.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-fa py-10">
+    <div class="prose-fa max-w-none text-muted-foreground leading-8">
+      <p>
+        انتخاب هتل مناسب، یکی از مهم‌ترین عوامل موفقیت سفر به ارمنستان است. ایروان پایتخت ارمنستان، شهرى است که در آن هتل‌های متنوعی از بوتیک‌هتل‌های سنتی تا برندهای بین‌المللی مانند ماریوت و هیلتون یافت می‌شود. در این صفحه، پنج تا از بهترین هتل‌های ایروان را معرفی می‌کنیم که آکای تراول با آن‌ها همکاری مستقیم دارد و برای مسافران ایرانی رزرو می‌کند. هر هتل با توجه به موقعیت، قیمت، امکانات و نوع اتاق‌ها بررسی شده است.
+      </p>
+
+      <h2 class="section-title mb-4 mt-10">هتل‌های ایروان بر اساس منطقه</h2>
+      <p>
+        ایروان به چند منطقه اصلی تقسیم می‌شود که هر کدام ویژگی‌های خود را دارند. منطقه <strong>کنترون</strong> (Kentron) یا مرکز شهر، محبوب‌ترین منطقه برای اقامت توریست‌ها است. این منطقه شامل میدان جمهوریه، کاسکید، بازار ورنیساژ و بیشتر موزه‌ها و گالری‌های هنری است. هتل‌های [ماریوت ایروان](/hotels/armenia-marriott-yerevan) و [هالیدی‌این ایروان](/hotels/holiday-inn-yerevan-republic-square) در میدان جمهوریه قرار دارند، در حالی که [گرند ایروان](/hotels/grand-hotel-yerevan) و [دبل‌تری هیلتون](/hotels/doubletree-by-hilton-yerevan) در خیابان‌های اطراف کاسکید واقع شده‌اند. [هتل بوتیک توفنکیان](/hotels/tufenkian-historic-yerevan) نیز نزدیک بازار ورنیساژ است.
+      </p>
+      <p>
+        منطقه <strong>میدان جمهوریه</strong> قلب فرهنگی و تاریخی ایروان است. فواره‌های رقصان میدان، موزه تاریخ ایروان و گالری ملی ارمنستان در این منطقه قرار دارند. هتل‌های این منطقه بهترین دسترسی به جاذبه‌های اصلی را دارند. منطقه <strong>کاسکید</strong> که در شمال مرکز شهر قرار دارد، با پله‌های عظیم و مجسمه‌های فضای باز، یکی از نمادهای ایروان است. هتل‌های نزدیک کاسکید دسترسی عالی به پارک‌ها و گالری‌های هنری دارند. منطقه <strong>ورنیساژ</strong> در شرق مرکز شهر، محل برگزاری بازار هفتگی صنایع دستی است و هتل‌های این منطقه حس اقامت در شهر قدیمی ایروان را منتقل می‌کنند.
+      </p>
+
+      <h2 class="section-title mb-4 mt-10">محدوده قیمت هتل‌های ایروان</h2>
+      <p>
+        قیمت هتل‌های ایروان در مقایسه با پایتخت‌های اروپایی بسیار مناسب‌تر است. هتل‌های ۵ ستاره مانند ماریوت و گرند بین ۹۰ تا ۱۸۰ دلار در شب هزینه دارند. هتل‌های ۴ ستاره زنجیره‌ای مانند دبل‌تری هیلتون و هالیدی‌این بین ۶۰ تا ۱۱۰ دلار در شب هستند. هتل‌های بوتیک مانند توفنکیان نیز بین ۶۵ تا ۱۰۰ دلار در شب هزینه دارند. در فصل اوج توریستی (ژوئن تا سپتامبر) و روزهای نزدیک به رویدادهای ویژه، قیمت‌ها افزایش می‌یابد. رزرو گروهی از طریق آکای تراول می‌تواند تخفیف ۱۵ تا ۲۰ درصدی به همراه داشته باشد.
+      </p>
+      <p>
+        برای مسافران با بودجه محدودتر، هتل‌های ۳ ستاره و مهمان‌پذیرهای اقتصادی در منطقه کنترون با قیمت ۳۰ تا ۵۰ دلار در شب نیز قابل دسترس هستند. آکای تراول می‌تواند بر اساس بودجه شما بهترین هتل را پیشنهاد دهد. برای مشاوره رایگان، از طریق [صفحه تماس](/contact) با ما در ارتباط باشید.
+      </p>
+
+      <h2 class="section-title mb-4 mt-10">بهترین فصل برای رزرو هتل</h2>
+      <p>
+        قیمت و دسترسی هتل‌های ایروان به شدت تحت تاثیر فصل است. در <strong>فصل پایین</strong> (نوامبر تا مارس)، قیمت‌ها پایین‌ترین حد خود را دارند و هتل‌ها خلوت‌تر هستند. این دوره برای مسافرانی که به دنبال قیمت مناسب هستند بهترین است، به ویژه برای [تور کریسمس ایروان](/tours/christmas-armenia-yerevan) و [تور ژانویه ایروان](/tours/january-armenia-yerevan). در <strong>فصل اوج</strong> (ژوئن تا سپتامبر)، قیمت‌ها به بالاترین حد خود می‌رسند و رزرو زودهنگام ضروری است. این دوره برای [تور جشنواره وارداوار](/tours/vardavar-water-festival-armenia) بهترین است. فصل پاییز (سپتامبر تا نوامبر) با هوای ملایم و قیمت‌های متعادل، زمان طلایی سفر به ایروان است. [تور هالووین ایروان](/tours/halloween-armenia-yerevan) و [تور جشنواره بادکنک](/tours/balloon-festival-armenia-yerevan) در این دوره برگزار می‌شوند.
+      </p>
+
+      <h2 class="section-title mb-4 mt-10">نکات رزرو هتل برای مسافران ایرانی</h2>
+      <p>
+        مسافران ایرانی در رزرو هتل در ارمنستان باید به چند نکته مهم توجه کنند. اول، پاسپورت معتبر با حداقل ۶ ماه اعتبار الزامی است. دوم، هتل‌های ایروان ویزا برای ایرانیان صادر نمی‌کنند، اما ارمنستان برای شهروندان ایرانی ویزای فرودگاهی رایگان ارائه می‌دهد. سوم، در رزرو هتل، اطلاعات هویتی باید دقیقاً با پاسپورت مطابقت داشته باشد. چهارم، بیشتر هتل‌های ایروان کارت اعتباری بین‌المللی برای تضمین رزرو درخواست می‌کنند، اما پرداخت نقدی با درام ارمنستان نیز امکان‌پذیر است.
+      </p>
+      <p>
+        آکای تراول به عنوان متخصص تورهای ارمنستان، رزرو هتل را برای مسافران ایرانی ساده می‌کند. ما با شبکه‌ای از هتل‌های ایروان همکاری مستقیم داریم و می‌توانیم بدون نیاز به کارت اعتباری بین‌المللی، هتل مورد نظر شما را رزرو کنیم. همچنین برای [تور مراسم خاص ارمنستان](/tours/special-ceremonies-armenia) می‌توانیم هتل متناسب با برنامه تور شما انتخاب کنیم. کافی است از طریق [صفحه تماس](/contact) یا واتساپ با ما در ارتباط باشید.
+      </p>
+
+      <h2 class="section-title mb-4 mt-10">هتل‌های پیشنهادی آکای تراول</h2>
+      <p>
+        در ادامه، پنج هتل برتر ایروان که آکای تراول به مسافران خود پیشنهاد می‌دهد را معرفی می‌کنیم. هر هتل با توجه به موقعیت، امکانات، قیمت و نوع مسافرانی که مناسب‌تر است، انتخاب شده است. برای اطلاعات بیشتر درباره هر هتل، روی لینک مربوطه کلیک کنید.
+      </p>
+    </div>
+
+    <!-- Hotel cards grid -->
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-10">
+      {HOTELS.map((h) => (
+        <a href={`/hotels/${h.slug}`} class="card-fa overflow-hidden group block">
+          <div class="aspect-[16/10] overflow-hidden">
+            <img
+              src={h.image}
+              alt={h.imageAlt}
+              width="940"
+              height="650"
+              loading="lazy"
+              decoding="async"
+              class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-2 text-xs text-muted-foreground mb-2">
+              <span class="rounded-full bg-accent/15 text-accent-foreground px-2 py-1 font-semibold">{h.starRating} ستاره</span>
+              <span>{h.district}</span>
+            </div>
+            <h3 class="font-bold text-lg mb-2 group-hover:text-primary transition-colors">{h.title}</h3>
+            <p class="text-sm text-muted-foreground leading-7 line-clamp-3">{h.excerpt}</p>
+            <span class="mt-4 inline-block text-sm font-bold text-primary">مشاهده هتل ←</span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- Quick tour links -->
+    <div class="mt-12 card-fa p-6">
+      <h2 class="section-title mb-4">هتل‌ها و تورهای ارمنستان</h2>
+      <p class="text-muted-foreground leading-8 mb-4">
+        آکای تراول هتل و تور را به صورت یکپارچه رزرو می‌کند. در تورهای ویژه ما، هتل بر اساس برنامه تور و رویداد انتخاب می‌شود. تورهای زیر همگی با اقامت در هتل‌های معرفی‌شده این صفحه قابل رزرو هستند:
+      </p>
+      <div class="flex flex-wrap gap-3">
+        {TOURS.map((t) => (
+          <a href={`/tours/${t.slug}`} class="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-2 text-sm font-semibold hover:bg-primary hover:text-primary-foreground transition-colors">
+            {t.shortTitle}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Cta compact />
+</Layout>

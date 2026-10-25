@@ -1,0 +1,101 @@
+---
+import { SITE } from '@/lib/site';
+
+export interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  jsonLd?: object | object[];
+  noindex?: boolean;
+  alternates?: { hreflang: string; href: string }[];
+}
+
+const {
+  title,
+  description = SITE.description,
+  canonical,
+  image = '/og-default.jpg',
+  type = 'website',
+  jsonLd,
+  noindex = false,
+  alternates = [],
+} = Astro.props;
+
+const url = canonical
+  ? new URL(canonical, SITE.domain).href
+  : new URL(Astro.url.pathname, SITE.domain).href;
+const ogImage = new URL(image, SITE.domain).href;
+const fullTitle = title.includes(SITE.name) ? title : `${title} | ${SITE.name}`;
+
+const baseLd = {
+  '@context': 'https://schema.org',
+  '@type': 'TravelAgency',
+  name: SITE.legalName,
+  alternateName: SITE.brand,
+  url: SITE.domain,
+  image: ogImage,
+  telephone: `+98${SITE.phone}`,
+  email: SITE.email,
+  priceRange: '$$',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'خ آزادگان، خ تیلا',
+    addressLocality: 'ارومیه',
+    addressRegion: 'آذربایجان غربی',
+    addressCountry: 'IR',
+  },
+  sameAs: [SITE.instagramUrl],
+  areaServed: 'AM',
+};
+
+const ldArray = jsonLd
+  ? Array.isArray(jsonLd)
+    ? [baseLd, ...jsonLd]
+    : [baseLd, jsonLd]
+  : [baseLd];
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={url} />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+{alternates.length > 0 ? (
+  alternates.map((alt) => <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />)
+) : (
+  <>
+    <link rel="alternate" hreflang="fa-IR" href={url} />
+    <link rel="alternate" hreflang="x-default" href={url} />
+  </>
+)}
+
+{noindex && <meta name="robots" content="noindex,nofollow" />}
+<meta name="robots" content="index,follow,max-image-preview:large" />
+
+<!-- Open Graph -->
+<meta property="og:type" content={type} />
+<meta property="og:locale" content="fa_IR" />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={url} />
+<meta property="og:image" content={ogImage} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+{
+  ldArray.map((ld) => (
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(ld)}
+    />
+  ))
+}

@@ -1,0 +1,112 @@
+---
+import '@/styles/globals.css';
+import Layout from '@/layouts/Layout.astro';
+import { SITE, LINKS } from '@/lib/site';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Cta from '@/components/Cta.astro';
+
+const contactLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: `تماس با ${SITE.name}`,
+  url: `${SITE.domain}/contact`,
+};
+---
+
+<Layout
+  title="تماس با آکای تراول"
+  description="تماس با آژانس گردشگری آکای تراول؛ واتساپ، تلگرام، تلفن ثابت و ایمیل. رزرو تورهای ویژه ارمنستان."
+  canonical="/contact"
+  jsonLd={contactLd}
+>
+  <Breadcrumbs items={[{ name: 'خانه', path: '/' }, { name: 'تماس' }]} />
+
+  <section class="container-fa py-12">
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-6">تماس با آکای تراول</h1>
+    <p class="text-muted-foreground leading-8 max-w-2xl mb-10">
+      برای رزرو تور یا مشاوره با کارشناسان آکای تراول، از یکی از راه‌های زیر استفاده کنید. ما در کوتاه‌ترین زمان پاسخ‌گوی شما هستیم.
+    </p>
+
+    <div class="grid gap-6 md:grid-cols-2 mb-12">
+      <!-- Contact methods -->
+      <div class="space-y-4">
+        <a href={LINKS.whatsapp} target="_blank" rel="noopener" class="card-fa p-5 flex items-center gap-4 group hover:border-primary">
+          <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white">واتساپ</span>
+          <div>
+            <div class="font-bold">واتساپ</div>
+            <div class="text-sm text-muted-foreground" dir="ltr">0{SITE.mobile}</div>
+          </div>
+        </a>
+        <a href={LINKS.telegram} target="_blank" rel="noopener" class="card-fa p-5 flex items-center gap-4 group hover:border-primary">
+          <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#229ED9] text-white">تلگرام</span>
+          <div>
+            <div class="font-bold">تلگرام</div>
+            <div class="text-sm text-muted-foreground" dir="ltr">0{SITE.mobile}</div>
+          </div>
+        </a>
+        <a href={LINKS.phoneCall} class="card-fa p-5 flex items-center gap-4 group hover:border-primary">
+          <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-secondary text-secondary-foreground">تلفن</span>
+          <div>
+            <div class="font-bold">تلفن ثابت</div>
+            <div class="text-sm text-muted-foreground" dir="ltr">{SITE.phone}</div>
+          </div>
+        </a>
+        <a href={LINKS.email} class="card-fa p-5 flex items-center gap-4 group hover:border-primary">
+          <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-accent text-accent-foreground">ایمیل</span>
+          <div>
+            <div class="font-bold">ایمیل</div>
+            <div class="text-sm text-muted-foreground" dir="ltr">{SITE.email}</div>
+          </div>
+        </a>
+        <div class="card-fa p-5 flex items-center gap-4">
+          <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground">آدرس</span>
+          <div>
+            <div class="font-bold">آدرس دفتر</div>
+            <div class="text-sm text-muted-foreground">{SITE.address}</div>
+          </div>
+        </div>
+        <a href={SITE.instagramUrl} target="_blank" rel="noopener" class="card-fa p-5 flex items-center gap-4 group hover:border-primary">
+          <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-pink-500 to-yellow-500 text-white">اینستا</span>
+          <div>
+            <div class="font-bold">اینستاگرام</div>
+            <div class="text-sm text-muted-foreground" dir="ltr">@{SITE.instagram}</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- WhatsApp form -->
+      <div class="card-fa p-6">
+        <h2 class="font-bold text-lg mb-4">فرم تماس سریع (واتساپ)</h2>
+        <p class="text-sm text-muted-foreground mb-5">فرم زیر را پر کنید و پیام شما مستقیم در واتساپ آکای تراول باز می‌شود.</p>
+        <form id="wa-form" class="space-y-4">
+          <div>
+            <label for="name" class="block text-sm font-semibold mb-1">نام و نام خانوادگی</label>
+            <input id="name" name="name" type="text" required class="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring" placeholder="نام شما" />
+          </div>
+          <div>
+            <label for="phone" class="block text-sm font-semibold mb-1">شماره تماس</label>
+            <input id="phone" name="phone" type="tel" required class="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring" placeholder="09xxxxxxxxx" dir="ltr" />
+          </div>
+          <div>
+            <label for="message" class="block text-sm font-semibold mb-1">پیام شما</label>
+            <textarea id="message" name="message" required rows="4" class="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring" placeholder="تور موردنظر و سوال خود را بنویسید..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary-fa w-full">ارسال در واتساپ</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <Cta compact />
+</Layout>
+
+<script is:inline define:vars={{ wa: LINKS.whatsapp }}>
+  document.getElementById('wa-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const text = encodeURIComponent('سلام، من ' + name + ' هستم.\nشماره تماس: ' + phone + '\n\n' + message);
+    window.open(wa + '?text=' + text, '_blank');
+  });
+</script>

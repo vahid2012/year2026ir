@@ -1,0 +1,85 @@
+---
+import '@/styles/globals.css';
+import Layout from '@/layouts/Layout.astro';
+import { SITE } from '@/lib/site';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Faq from '@/components/Faq.astro';
+import Cta from '@/components/Cta.astro';
+
+const faqs = [
+  { q: 'کدام خیابان ایروان برای کافه‌نشینی بهترین است؟', a: 'خیابان ساریان با کافه‌ها و رستوران‌های متنوع بهترین خیابان برای کافه‌نشینی است. خیابان آبوویان نیز با کافه‌های شیک و بوتیک‌ها گزینه‌ای عالی است.' },
+  { q: 'آیا خیابان شمالی ایروان برای خرید مناسب است؟', a: 'بله، خیابان شمالی (Northern Avenue) با مراکز خرید مدرن، بوتیک‌های بین‌المللی و کافه‌های شیک، یکی از بهترین خیابان‌های ایروان برای خرید است.' },
+  { q: 'فاصله خیابان ماشتوتس تا میدان جمهوریه چقدر است؟', a: 'خیابان ماشتوتس از میدان جمهوریه شروع می‌شود و در جهت شمال امتداد می‌یابد. کل طول خیابان حدود ۳ کیلومتر است و با پیاده‌روی قابل دسترس است.' },
+];
+
+const articleLd = { '@context': 'https://schema.org', '@type': 'Article', headline: 'خیابان‌های معروف ایروان', description: 'راهنمای خیابان‌های معروف ایروان؛ ماشتوتس، آبوویان، ساریان، خیابان شمالی، تومانیان، باقرامیان و کومیتاس.', url: `${SITE.domain}/travel-guide/yerevan-streets`, inLanguage: 'fa-IR', author: { '@type': 'Organization', name: SITE.legalName }, publisher: { '@type': 'Organization', name: SITE.legalName } };
+const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', url: `${SITE.domain}/travel-guide/yerevan-streets`, mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
+const breadLd = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'خانه', item: SITE.domain }, { '@type': 'ListItem', position: 2, name: 'راهنمای سفر', item: `${SITE.domain}/travel-guide` }, { '@type': 'ListItem', position: 3, name: 'خیابان‌های ایروان', item: `${SITE.domain}/travel-guide/yerevan-streets` }] };
+---
+
+<Layout
+  title="خیابان‌های معروف ایروان | راهنمای سفر"
+  description="راهنمای خیابان‌های معروف ایروان؛ ماشتوتس، آبوویان، ساریان، خیابان شمالی، تومانیان، باقرامیان و کومیتاس با کافه‌ها و فروشگاه‌ها."
+  canonical="/travel-guide/yerevan-streets"
+  image="https://images.pexels.com/photos/2096983/pexels-photo-2096983.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+  type="article"
+  jsonLd={[articleLd, faqLd, breadLd]}
+>
+  <Breadcrumbs items={[{ name: 'خانه', path: '/' }, { name: 'راهنمای سفر', path: '/travel-guide' }, { name: 'خیابان‌های ایروان' }]} />
+
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="https://images.pexels.com/photos/2096983/pexels-photo-2096983.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="خیابان سرسبز ایروان با درختان و کافه‌ها" width="940" height="650" class="h-full w-full object-cover" loading="eager" />
+      <div class="absolute inset-0 bg-gradient-to-t from-secondary/95 via-secondary/70 to-secondary/30"></div>
+    </div>
+    <div class="relative container-fa py-20 md:py-28 text-white">
+      <h1 class="text-3xl md:text-5xl font-extrabold mb-4 max-w-3xl">خیابان‌های معروف ایروان</h1>
+      <p class="text-lg text-white/90 max-w-2xl leading-8">راهنمای خیابان‌های معروف ایروان؛ از ماشتوتس و آبوویان تا ساریان و خیابان شمالی با کافه‌ها، فروشگاه‌ها و فضای شهری.</p>
+    </div>
+  </section>
+
+  <section class="container-fa py-10">
+    <div class="prose-fa max-w-none text-muted-foreground leading-8">
+      <p>خیابان‌های ایروان روح این شهر را تشکیل می‌دهند. هر خیابان با فضای خاص خود، کافه‌ها، فروشگاه‌ها و جاذبه‌های منحصربه‌فرد، تجربه‌ای متفاوت از شهر ارائه می‌دهد. در این راهنما، هفت خیابان معروف ایروان را معرفی می‌کنیم تا گشت شهری شما آگاهانه و لذت‌بخش باشد. برای آشنایی با جاذبه‌های شهر، [راهنمای جاذبه‌های ایروان](/travel-guide/yerevan-attractions) را نیز ببینید.</p>
+
+      <h2 class="section-title mb-4 mt-10">خیابان ماشتوتس (Mashtots Avenue)</h2>
+      <p>خیابان ماشتوتس یکی از اصلی‌ترین خیابان‌های ایروان است که از میدان جمهوریه به سمت شمال امتداد می‌یابد. این خیابان با درختان سایه‌گیر، فروشگاه‌های بوتیک، کافه‌ها و کتاب‌فروشی‌ها، قلب تجاری و فرهنگی شهر است. موزه تاریخ ارمنستان و پارک عشق در امتداد این خیابان قرار دارند. گشت در ماشتوتس در عصر با نور ملایم آفتاب و صدای موسیقی خیابانی، تجربه‌ای دل‌انگیز است. [تور جشنواره بادکنک ایروان](/tours/balloon-festival-armenia-yerevan) از این خیابان عبور می‌کند.</p>
+
+      <div class="my-8 rounded-2xl overflow-hidden shadow-xl">
+        <img src="https://images.pexels.com/photos/2096983/pexels-photo-2096983.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="خیابان ماشتوتس ایروان با درختان و پیاده‌روی" width="940" height="650" class="w-full h-64 object-cover" loading="lazy" />
+      </div>
+
+      <h2 class="section-title mb-4 mt-10">خیابان آبوویان (Abovyan Street)</h2>
+      <p>خیابان آبوویان یکی از قدیمی‌ترین خیابان‌های ایروان است و از میدان جمهوریه به سمت شمال شرقی امتداد می‌یابد. این خیابان با ساختمان‌های تاریخی قرن نوزدهم، گالری‌های هنری، کافه‌های شیک و فروشگاه‌های صنایع دستی، حس اقامت در شهر قدیمی را منتقل می‌کند. [هتل گرند ایروان](/hotels/grand-hotel-yerevan) و [هتل توفنکیان](/hotels/tufenkian-historic-yerevan) هر دو در این خیابان قرار دارند. در روزهای کریسمس، آبوویان با نورپردازی‌های رنگی به زیباترین خیابان ایروان تبدیل می‌شود.</p>
+
+      <h2 class="section-title mb-4 mt-10">خیابان ساریان (Saryan Street)</h2>
+      <p>خیابان ساریان به «خیابان شراب و غذا» ایروان معروف است. این خیابان کوتاه با رستوران‌ها، کافه‌ها و بارهای شراب ارمنی، بهشت علاقه‌مندان به غذا و نوشیدنی است. در ساریان می‌توانید شراب ارمنی، کنیاک و غذاهای سنتی را در فضایی شیک و دنج تجربه کنید. این خیابان در شب‌ها با نورپردازی گرم و موسیقی ملایم، فضایی رمانتیک دارد. ساریان برای شام‌های [تور مراسم خاص ارمنستان](/tours/special-ceremonies-armenia) پیشنهاد می‌شود.</p>
+
+      <div class="my-8 rounded-2xl overflow-hidden shadow-xl">
+        <img src="https://images.pexels.com/photos/2629785/pexels-photo-2629785.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="کافه‌های خیابان ساریان ایروان با نورپردازی گرم" width="940" height="650" class="w-full h-64 object-cover" loading="lazy" />
+      </div>
+
+      <h2 class="section-title mb-4 mt-10">خیابان شمالی (Northern Avenue)</h2>
+      <p>خیابان شمالی مدرن‌ترین خیابان ایروان است و در سال ۲۰۰۷ افتتاح شد. این خیابان عریض و پیاده‌رو با مراکز خرید بزرگ، بوتیک‌های بین‌المللی، کافه‌های زنجیره‌ای و ساختمان‌های شیشه‌ای مدرن، تضادی جذاب با خیابان‌های تاریخی شهر می‌سازد. خیابان شمالی میدان جمهوریه را به کاسکید متصل می‌کند و مسیر پیاده‌روی خوشایندی را فراهم می‌کند. در شب‌ها، نورپردازی ساختمان‌ها و فواره‌های کوچک، فضایی شیک و مدرن می‌سازد.</p>
+
+      <h2 class="section-title mb-4 mt-10">خیابان تومانیان (Tumanyan Street)</h2>
+      <p>خیابان تومانیان در نزدیکی کاسکید قرار دارد و با باشگاه‌ها، بارها و رستوران‌های شبانه، یکی از مراکز زندگی شبانه ایروان است. باشگاه پلیگراف و لجند پاب هر دو در این خیابان قرار دارند. تومانیان در شب‌ها با جوانان و توریست‌ها پر می‌شود و صدای موسیقی از باشگاه‌ها به خیابان می‌رسد. [هتل دبل‌تری هیلتون](/hotels/doubletree-by-hilton-yerevan) در این خیابان قرار دارد و برای مسافرانی که به دنبال زندگی شبانه هستند ایده‌آل است. برای اطلاعات بیشتر، [راهنمای دیسکوهای ایروان](/travel-guide/yerevan-nightlife) را ببینید.</p>
+
+      <div class="my-8 rounded-2xl overflow-hidden shadow-xl">
+        <img src="https://images.pexels.com/photos/2076361/pexels-photo-2076361.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="خیابان تومانیان ایروان در شب با نورپردازی" width="940" height="650" class="w-full h-64 object-cover" loading="lazy" />
+      </div>
+
+      <h2 class="section-title mb-4 mt-10">خیابان باقرامیان (Baghramyan Avenue)</h2>
+      <p>خیابان باقرامیان یکی از زیباترین خیابان‌های ایروان است که با درختان بلند، ساختمان‌های سفارتخانه‌ها و عمارت‌های تاریخی، فضایی شیک و رسمی دارد. پارلمان ارمنستان، کاخ ریاست‌جمهوری و چندین سفارت در این خیابان قرار دارند. باقرامیان در پاییز با رنگ‌های زرد و نارنجی درختان، یکی از زیباترین خیابان‌های قفقاز می‌شود. گشت در باقرامیان در عصر پاییزی تجربه‌ای بی‌نظیر است.</p>
+
+      <h2 class="section-title mb-4 mt-10">خیابان کومیتاس (Komitas Avenue)</h2>
+      <p>خیابان کومیتاس در شمال ایروان قرار دارد و یکی از طولانی‌ترین خیابان‌های شهر است. این خیابان با فروشگاه‌های محلی، رستوران‌های اقتصادی و بازارهای سنتی، فضایی محلی‌تر و کم‌هزینه‌تر از خیابان‌های مرکزی دارد. در کومیتاس می‌توانید غذاهای ارمنی با قیمت مناسب و سوغاتی‌های محلی بخرید. این خیابان برای مسافرانی که به دنبال تجربه روزمره ایروان هستند مناسب است.</p>
+
+      <h2 class="section-title mb-4 mt-10">نکات گشت در خیابان‌های ایروان</h2>
+      <p>خیابان‌های مرکزی ایروان همگی در منطقه کنترون قرار دارند و با پیاده‌روی قابل دسترس هستند. در تابستان، آفتاب بعدازظهر قوی است و کلاه و عینک آفتابی توصیه می‌شود. در زمستان، خیابان‌ها ممکن است برفی باشند و کفش ضدبرف لازم است. تاکسی بین خیابان‌ها با Yandex Go حدود ۶۰۰ تا ۱۵۰۰ درام است. برای اقامت در نزدیکی خیابان‌های معروف، [راهنمای هتل‌های ایروان](/hotels) را ببینید. [تور ژانویه ایروان](/tours/january-armenia-yerevan) شامل گشت در خیابان‌های برفی ایروان است و برای آشنایی با شهرهای دیگر ارمنستان، [راهنمای شهرهای ارمنستان](/travel-guide/armenia-cities) را بخوانید.</p>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} pageUrl="/travel-guide/yerevan-streets" />
+  <Cta compact />
+</Layout>

@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Warm terracotta / deep blue / cream palette */
+    --background: 36 33% 97%;          /* warm cream */
+    --foreground: 215 35% 18%;         /* deep ink blue */
+    --card: 0 0% 100%;
+    --card-foreground: 215 35% 18%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 35% 18%;
+    --primary: 14 65% 48%;             /* terracotta */
+    --primary-foreground: 36 33% 97%;
+    --secondary: 215 45% 24%;          /* deep blue */
+    --secondary-foreground: 36 33% 97%;
+    --muted: 36 20% 92%;
+    --muted-foreground: 215 15% 40%;
+    --accent: 28 75% 56%;              /* amber accent */
+    --accent-foreground: 215 35% 15%;
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 36 18% 86%;
+    --input: 36 18% 86%;
+    --ring: 14 65% 48%;
+    --chart-1: 14 65% 48%;
+    --chart-2: 215 45% 40%;
+    --chart-3: 28 75% 56%;
+    --chart-4: 160 45% 40%;
+    --chart-5: 36 60% 60%;
+    --radius: 0.75rem;
+  }
+  .dark {
+    --background: 215 35% 10%;
+    --foreground: 36 30% 92%;
+    --card: 215 30% 14%;
+    --card-foreground: 36 30% 92%;
+    --popover: 215 30% 14%;
+    --popover-foreground: 36 30% 92%;
+    --primary: 14 60% 52%;
+    --primary-foreground: 215 35% 10%;
+    --secondary: 215 40% 26%;
+    --secondary-foreground: 36 30% 92%;
+    --muted: 215 25% 22%;
+    --muted-foreground: 36 15% 70%;
+    --accent: 28 70% 56%;
+    --accent-foreground: 215 35% 12%;
+    --destructive: 0 60% 45%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 215 25% 24%;
+    --input: 215 25% 24%;
+    --ring: 14 60% 52%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    font-family: 'Vazirmatn', system-ui, sans-serif;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-vazir antialiased;
+    line-height: 1.75;
+  }
+  h1, h2, h3, h4 {
+    line-height: 1.3;
+    font-weight: 700;
+  }
+  /* Persian numerals friendly spacing */
+  p {
+    text-align: justify;
+  }
+  .prose-fa p { line-height: 2; margin-bottom: 1.1rem; }
+  .prose-fa h2 { margin-top: 2.5rem; margin-bottom: 1rem; }
+  .prose-fa h3 { margin-top: 1.8rem; margin-bottom: 0.75rem; }
+  .prose-fa ul, .prose-fa ol { margin: 1rem 1.5rem; }
+  .prose-fa li { margin-bottom: 0.5rem; }
+  .prose-fa img { border-radius: 1rem; margin: 1.5rem 0; }
+}
+
+@layer components {
+  .container-fa {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+  .btn-primary-fa {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground transition-all hover:scale-[1.03] hover:bg-primary/90 shadow-lg shadow-primary/20;
+  }
+  .btn-secondary-fa {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-bold text-secondary-foreground transition-all hover:scale-[1.03] hover:bg-secondary/90 shadow-lg;
+  }
+  .card-fa {
+    @apply rounded-2xl border border-border bg-card text-card-foreground shadow-sm transition-all hover:shadow-xl;
+  }
+  .link-fa {
+    @apply text-primary font-semibold underline-offset-4 hover:underline transition-colors;
+  }
+  .section-title {
+    @apply text-2xl md:text-3xl font-extrabold text-foreground;
+  }
+}

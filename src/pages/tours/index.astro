@@ -1,0 +1,35 @@
+---
+import '@/styles/globals.css';
+import Layout from '@/layouts/Layout.astro';
+import { TOURS, SITE } from '@/lib/site';
+import TourCards from '@/components/TourCards.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Cta from '@/components/Cta.astro';
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'تورهای ارمنستان',
+  url: `${SITE.domain}/tours`,
+  inLanguage: 'fa-IR',
+};
+---
+
+<Layout
+  title="تورهای ارمنستان"
+  description="همه تورهای ویژه ارمنستان آکای تراول؛ کریسمس، هالووین، ژانویه، وارداوار، جشنواره بادکنک و مراسم خاص با راهنمای فارسی‌زبان."
+  canonical="/tours"
+  jsonLd={ld}
+>
+  <Breadcrumbs items={[{ name: 'خانه', path: '/' }, { name: 'تورها' }]} />
+
+  <section class="container-fa py-10">
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-5">تورهای ویژه ارمنستان</h1>
+    <p class="text-muted-foreground leading-8 max-w-3xl mb-10">
+      آکای تراول شش تور ویژه برای رویدادهای فرهنگی و مذهبی ارمنستان طراحی کرده است. از کریسمس حواریون در اچمیادزین تا نبرد آب وارداوار و پرواز بادکنک بر فراز ایروان. برای انتخاب بهترین زمان سفر، [راهنمای بهترین زمان سفر به ارمنستان](/blog/best-time-to-travel-armenia) را بخوانید. همه تورها با راهنمای فارسی‌زبان، هتل مرکزی و رزرو کامل انجام می‌شوند.
+    </p>
+    <TourCards />
+  </section>
+
+  <Cta compact />
+</Layout>

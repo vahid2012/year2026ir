@@ -1,0 +1,44 @@
+---
+import '@/styles/globals.css';
+import Seo from '@/components/Seo.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import FloatingButtons from '@/components/FloatingButtons.astro';
+import { SITE } from '@/lib/site';
+
+export interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  jsonLd?: object | object[];
+  noindex?: boolean;
+  hideHero?: boolean;
+}
+
+const props = Astro.props;
+---
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <Seo
+      title={props.title}
+      description={props.description}
+      canonical={props.canonical}
+      image={props.image}
+      type={props.type}
+      jsonLd={props.jsonLd}
+      noindex={props.noindex}
+    />
+  </head>
+  <body class="min-h-screen flex flex-col bg-background text-foreground">
+    <Header />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+    <FloatingButtons />
+  </body>
+</html>

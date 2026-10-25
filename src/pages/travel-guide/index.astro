@@ -1,0 +1,106 @@
+---
+import '@/styles/globals.css';
+import Layout from '@/layouts/Layout.astro';
+import { SITE } from '@/lib/site';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Cta from '@/components/Cta.astro';
+
+const guides = [
+  {
+    href: '/travel-guide/yerevan-attractions',
+    title: 'جاذبه‌های گردشگری ایروان',
+    desc: 'از میدان جمهوریه و کاسکید تا موزه‌ها، ورنیساژ و صومعه‌های اطراف ایروان.',
+    img: 'https://images.pexels.com/photos/15338719/pexels-photo-15338719.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    alt: 'کلیسای تاریخی ارمنستان در منظر کوهستانی',
+  },
+  {
+    href: '/travel-guide/yerevan-nightlife',
+    title: 'دیسکوها و زندگی شبانه ایروان',
+    desc: 'باشگاه‌های واقعی ایروان، رزرو میز، قیمت‌ها و نکات ایمنی برای شب‌های پرشور.',
+    img: 'https://images.pexels.com/photos/5143168/pexels-photo-5143168.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    alt: 'باشگاه شبانه با نورپردازی نئونی در ایروان',
+  },
+  {
+    href: '/travel-guide/armenia-cities',
+    title: 'شهرهای ارمنستان',
+    desc: 'ایروان، گیومری، دیلیجان، واناادزور، اچمیادزین، گوریس و تاتو و سایر شهرها.',
+    img: 'https://images.pexels.com/photos/17958099/pexels-photo-17958099.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    alt: 'منظره دره نوراوانک ارمنستان',
+  },
+  {
+    href: '/travel-guide/yerevan-streets',
+    title: 'خیابان‌های معروف ایروان',
+    desc: 'ماشتوتس، آبوویان، ساریان، خیابان شمالی، تومانیان، باقرامیان و کومیتاس.',
+    img: 'https://images.pexels.com/photos/2096983/pexels-photo-2096983.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    alt: 'خیابان شلوغ ایروان با درختان و کافه‌ها',
+  },
+];
+
+const hubLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'راهنمای سفر به ارمنستان',
+  url: `${SITE.domain}/travel-guide`,
+  inLanguage: 'fa-IR',
+  hasPart: guides.map((g) => ({ '@type': 'Article', name: g.title, url: `${SITE.domain}${g.href}` })),
+};
+
+const breadLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'خانه', item: SITE.domain },
+    { '@type': 'ListItem', position: 2, name: 'راهنمای سفر', item: `${SITE.domain}/travel-guide` },
+  ],
+};
+---
+
+<Layout
+  title="راهنمای سفر به ارمنستان"
+  description="راهنمای کامل سفر به ارمنستان؛ جاذبه‌های ایروان، زندگی شبانه، شهرهای ارمنستان و خیابان‌های معروف ایروان با اطلاعات کاربردی برای مسافران ایرانی."
+  canonical="/travel-guide"
+  jsonLd={[hubLd, breadLd]}
+>
+  <Breadcrumbs items={[{ name: 'خانه', path: '/' }, { name: 'راهنمای سفر' }]} />
+
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="https://images.pexels.com/photos/15338719/pexels-photo-15338719.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="منظره کوهستانی ارمنستان" width="940" height="650" class="h-full w-full object-cover" loading="eager" />
+      <div class="absolute inset-0 bg-gradient-to-t from-secondary/95 via-secondary/70 to-secondary/30"></div>
+    </div>
+    <div class="relative container-fa py-20 md:py-28 text-white">
+      <h1 class="text-3xl md:text-5xl font-extrabold mb-4 max-w-3xl">راهنمای سفر به ارمنستان</h1>
+      <p class="text-lg text-white/90 max-w-2xl leading-8">
+        هر آنچه برای سفر به ارمنستان باید بدانید؛ از جاذبه‌های ایروان و زندگی شبانه تا شهرها و خیابان‌های معروف.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-fa py-10">
+    <div class="prose-fa max-w-none text-muted-foreground leading-8">
+      <p>
+        سفر به ارمنستان تجربه‌ای فراتر از تورهای معمول است. این کشور باستانی در قلب قفقاز، با فرهنگی غنی، طبیعتی خیره‌کننده و شهری پرشور به نام ایروان، مقصدی است که هر مسافری باید با اطلاعات کامل وارد آن شود. راهنمای سفر آکای تراول در چهار بخش، شما را با جاذبه‌های گردشگری ایروان، زندگی شبانه و باشگاه‌های شهر، شهرهای مختلف ارمنستان و خیابان‌های معروف ایروان آشنا می‌کند. هر بخش با اطلاعات کاربردی، نکات فرهنگی و توصیه‌های مسافرتی نوشته شده تا سفری آگاهانه و لذت‌بخش داشته باشید.
+      </p>
+      <p>
+        ارمنستان کشوری است که می‌توانید در آن همزمان از معماری باستانی کلیساهای حواریون، طبیعت بکر کوهستان‌های قفقاز و شب‌های پرشور باشگاه‌های ایروان لذت ببرید. برای انتخاب بهترین زمان سفر، [راهنمای بهترین زمان سفر به ارمنستان](/blog/best-time-to-travel-armenia) را بخوانید و برای رزرو تورهای ویژه، [تورهای ارمنستان](/tours) را ببینید. اگر به دنبال اقامت هستید، [هتل‌های ایروان](/hotels) راهنمای کاملی است.
+      </p>
+    </div>
+
+    <div class="grid gap-6 sm:grid-cols-2 mt-10">
+      {guides.map((g) => (
+        <a href={g.href} class="card-fa overflow-hidden group block">
+          <div class="aspect-[16/10] overflow-hidden">
+            <img src={g.img} alt={g.alt} width="940" height="650" loading="lazy" decoding="async" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          </div>
+          <div class="p-5">
+            <h3 class="font-bold text-lg mb-2 group-hover:text-primary transition-colors">{g.title}</h3>
+            <p class="text-sm text-muted-foreground leading-7">{g.desc}</p>
+            <span class="mt-4 inline-block text-sm font-bold text-primary">ادامه مطلب ←</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <Cta compact />
+</Layout>

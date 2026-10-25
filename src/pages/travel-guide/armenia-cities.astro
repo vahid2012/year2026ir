@@ -1,0 +1,123 @@
+---
+import '@/styles/globals.css';
+import Layout from '@/layouts/Layout.astro';
+import { SITE } from '@/lib/site';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Faq from '@/components/Faq.astro';
+import Cta from '@/components/Cta.astro';
+
+const faqs = [
+  { q: 'کدام شهر ارمنستان برای طبیعت‌گردی بهترین است؟', a: 'دیلیجان با جنگل‌های سرسبز و پارک ملی دیلیجان بهترین شهر برای طبیعت‌گردی است. جرموک با چشمه‌های آب معدنی نیز گزینه‌ای عالی است.' },
+  { q: 'فاصله گیومری تا ایروان چقدر است؟', a: 'گیومری در ۱۲۰ کیلومتری ایروان قرار دارد و با خودرو حدود ۲ ساعت طول می‌کشد. اتوبوس نیز بین دو شهر حرکت می‌کند و حدود ۲۵۰۰ درام هزینه دارد.' },
+  { q: 'آیا تاتو و گوریس در دسترس هستند؟', a: 'گوریس در ۲۵۰ کیلومتری ایروان است و با خودرو ۳ تا ۴ ساعت طول می‌کشد. تله‌کابین تاتو از گوریس قابل دسترس است و طولانی‌ترین تله‌کابین جهان را دارد.' },
+];
+
+const articleLd = { '@context': 'https://schema.org', '@type': 'Article', headline: 'شهرهای ارمنستان', description: 'راهنمای کامل شهرهای ارمنستان؛ ایروان، گیومری، دیلیجان، واناادزور، اچمیادزین، گوریس، تاتو، سیسیان، آشتاراک و جرموک.', url: `${SITE.domain}/travel-guide/armenia-cities`, inLanguage: 'fa-IR', author: { '@type': 'Organization', name: SITE.legalName }, publisher: { '@type': 'Organization', name: SITE.legalName } };
+const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', url: `${SITE.domain}/travel-guide/armenia-cities`, mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
+const breadLd = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'خانه', item: SITE.domain }, { '@type': 'ListItem', position: 2, name: 'راهنمای سفر', item: `${SITE.domain}/travel-guide` }, { '@type': 'ListItem', position: 3, name: 'شهرهای ارمنستان', item: `${SITE.domain}/travel-guide/armenia-cities` }] };
+
+const cities = [
+  { name: 'ایروان', pop: '۱٫۱ میلیون', dist: '۰', desc: 'پایتخت و بزرگ‌ترین شهر', best: 'همه فصول' },
+  { name: 'گیومری', pop: '۱۲۰ هزار', dist: '۱۲۰ کیلومتر', desc: 'دومین شهر، فرهنگ و موسیقی', best: 'بهار و پاییز' },
+  { name: 'دیلیجان', pop: '۲۰ هزار', dist: '۱۰۰ کیلومتر', desc: 'طبیعت و پارک ملی', best: 'تابستان' },
+  { name: 'واناادزور', pop: '۸۰ هزار', dist: '۱۴۰ کیلومتر', desc: 'صنعت و باغ‌ها', best: 'بهار و تابستان' },
+  { name: 'اچمیادزین', pop: '۶۰ هزار', dist: '۲۰ کیلومتر', desc: 'مرکز کلیسای حواریون', best: 'همه فصول' },
+  { name: 'گوریس', pop: '۲۰ هزار', dist: '۲۵۰ کیلومتر', desc: 'تاتو و صومعه تاتو', best: 'تابستان و پاییز' },
+  { name: 'سیسیان', pop: '۱۵ هزار', dist: '۲۳۰ کیلومتر', desc: 'موج‌نما و طبیعت', best: 'تابستان' },
+  { name: 'آشتاراک', pop: '۲۰ هزار', dist: '۲۰ کیلومتر', desc: 'کلیساهای باستانی', best: 'بهار' },
+  { name: 'جرموک', pop: '۵ هزار', dist: '۱۷۰ کیلومتر', desc: 'آب معدنی و تفریح', best: 'تابستان' },
+];
+---
+
+<Layout
+  title="شهرهای ارمنستان | راهنمای سفر"
+  description="راهنمای کامل شهرهای ارمنستان؛ ایروان، گیومری، دیلیجان، واناادزور، اچمیادزین، گوریس، تاتو، سیسیان، آشتاراک و جرموک با جدول مقایسه."
+  canonical="/travel-guide/armenia-cities"
+  image="https://images.pexels.com/photos/17958099/pexels-photo-17958099.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+  type="article"
+  jsonLd={[articleLd, faqLd, breadLd]}
+>
+  <Breadcrumbs items={[{ name: 'خانه', path: '/' }, { name: 'راهنمای سفر', path: '/travel-guide' }, { name: 'شهرهای ارمنستان' }]} />
+
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="https://images.pexels.com/photos/17958099/pexels-photo-17958099.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="منظره دره نوراوانک ارمنستان" width="940" height="650" class="h-full w-full object-cover" loading="eager" />
+      <div class="absolute inset-0 bg-gradient-to-t from-secondary/95 via-secondary/70 to-secondary/30"></div>
+    </div>
+    <div class="relative container-fa py-20 md:py-28 text-white">
+      <h1 class="text-3xl md:text-5xl font-extrabold mb-4 max-w-3xl">شهرهای ارمنستان</h1>
+      <p class="text-lg text-white/90 max-w-2xl leading-8">راهنمای کامل شهرهای ارمنستان؛ از ایروان پایتخت تا گوریس و تاتو، با جدول مقایسه و اطلاعات کاربردی.</p>
+    </div>
+  </section>
+
+  <section class="container-fa py-10">
+    <div class="prose-fa max-w-none text-muted-foreground leading-8">
+      <p>ارمنستان با مساحت ۲۹۷۴۳ کیلومتر مربع، کشوری کوچک اما متنوع است که در آن شهرهایی با فرهنگ، طبیعت و تاریخ متفاوت یافت می‌شود. در این راهنما، مهم‌ترین شهرهای ارمنستان را معرفی می‌کنیم و در پایان جدولی برای مقایسه ارائه می‌دهیم. برای آشنایی با جاذبه‌های پایتخت، [راهنمای جاذبه‌های ایروان](/travel-guide/yerevan-attractions) را ببینید.</p>
+
+      <h2 class="section-title mb-4 mt-10">ایروان</h2>
+      <p>ایروان پایتخت و بزرگ‌ترین شهر ارمنستان با جمعیت ۱٫۱ میلیون نفر است. این شهر ۲۸۰۰ ساله با معماری نئوکلاسیک، موزه‌های غنی و زندگی شبانه پرشور، قلب فرهنگی و اقتصادی کشور است. همه تورهای آکای تراول از ایروان آغاز می‌شوند و اقامت در [هتل‌های ایروان](/hotels) در مرکز شهر توصیه می‌شود. برای آشنایی بیشتر با خیابان‌های شهر، [راهنمای خیابان‌های ایروان](/travel-guide/yerevan-streets) را بخوانید.</p>
+
+      <div class="my-8 rounded-2xl overflow-hidden shadow-xl">
+        <img src="https://images.pexels.com/photos/16206879/pexels-photo-16206879.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="نمای پانورامای ایروان با کوه آرارات" width="940" height="650" class="w-full h-64 object-cover" loading="lazy" />
+      </div>
+
+      <h2 class="section-title mb-4 mt-10">گیومری</h2>
+      <p>گیومری دومین شهر ارمنستان با جمعیت ۱۲۰ هزار نفر است و در ۱۲۰ کیلومتری ایروان قرار دارد. این شهر با معماری سنگی قرن نوزدهم، موسیقی سنتی و فرهنگ غنی، مرکز هنر و موسیقی ارمنستان محسوب می‌شود. گیومری در زلزله ۱۹۸۸ به شدت آسیب دید اما بخش‌های تاریخی آن بازسازی شده‌اند. موزه دزیان و خانه‌های سنگی محله کومایری از جاذبه‌های اصلی هستند. گشت یک‌روزه گیومری از ایروان قابل انجام است.</p>
+
+      <h2 class="section-title mb-4 mt-10">دیلیجان</h2>
+      <p>دیلیجان در ۱۰۰ کیلومتری شمال ایروان، بهشتی سرسبز در کوهستان‌های قفقاز است. این شهر با جنگل‌های انبوه، چشمه‌های آب معدنی و پارک ملی دیلیجان، مقصد اصلی طبیعت‌گردی ارمنستان است. صومعه آیرچاتانک و خانه‌های چوبی سنتی دیلیجان از جاذبه‌های اصلی هستند. دیلیجان برای گشت یک‌روزه یا دو روزه از ایروان ایده‌آل است و هوای خنک آن در تابستان پناهگاهی از گرمای ایروان می‌سازد.</p>
+
+      <div class="my-8 rounded-2xl overflow-hidden shadow-xl">
+        <img src="https://images.pexels.com/photos/15806248/pexels-photo-15806248.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="جنگل سرسبز دیلیجان در ارمنستان" width="940" height="650" class="w-full h-64 object-cover" loading="lazy" />
+      </div>
+
+      <h2 class="section-title mb-4 mt-10">واناادزور</h2>
+      <p>واناادزور سومین شهر ارمنستان با جمعیت ۸۰ هزار نفر است و در ۱۴۰ کیلومتری ایروان قرار دارد. این شهر با باغ‌های میوه، صنایع نساجی و کلیسای تاریخی سورپ هوهانس شناخته می‌شود. واناادزور در مسیر راه‌آهن ایروان-تفلیس قرار دارد و ایستگاه راه‌آهن آن از معماری شوروی است. گشت در باغ‌های میوه و طبیعت اطراف واناادزور در بهار و تابستان لذت‌بخش است.</p>
+
+      <h2 class="section-title mb-4 mt-10">اچمیادزین</h2>
+      <p>اچمیادزین در ۲۰ کیلومتری ایروان، مرکز روحانی کلیسای حواریون ارمنستان است. کلیسای مادر اچمیادزین که در سال ۳۰۳ میلادی ساخته شد، یکی از قدیمی‌ترین کلیساهای جهان است. مراعات کریسمس و تقدیس آب در این شهر برگزار می‌شود. [تور کریسمس ایروان](/tours/christmas-armenia-yerevan) و [تور ژانویه ایروان](/tours/january-armenia-yerevan) هر دو اچمیادزین را در برنامه دارند. موزه گنجینه اچمیادزین آثار مقدسی مانند نیزه مقدس را نگه می‌دارد.</p>
+
+      <h2 class="section-title mb-4 mt-10">گوریس و تاتو</h2>
+      <p>گوریس در ۲۵۰ کیلومتری جنوب ایروان، در منطقه‌ای کوهستانی با صخره‌های شگفت‌انگیز قرار دارد. این شهر با معماری سنگی، غارهای باستانی و طبیعت بکر، مقصدی برای ماجراجویان است. تله‌کابین تاتو (Tatev) از نزدیک‌ترین روستا به گوریس reachable است و طولانی‌ترین تله‌کابین دوطرفه جهان (۵۷۵۲ متر) را دارد. صومعه تاتو در بالای کوه قرار دارد و منظره‌ای بی‌نظیر از دره و صخره‌ها ارائه می‌دهد. گشت گوریس و تاتو نیاز به یک روز کامل دارد.</p>
+
+      <div class="my-8 rounded-2xl overflow-hidden shadow-xl">
+        <img src="https://images.pexels.com/photos/36096774/pexels-photo-36096774.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="صومعه تاتو بر فراز کوه در ارمنستان" width="940" height="650" class="w-full h-64 object-cover" loading="lazy" />
+      </div>
+
+      <h2 class="section-title mb-4 mt-10">سیسیان</h2>
+      <p>سیسیان در ۲۳۰ کیلومتری جنوب ایروان، شهر کوچکی با جاذبه‌ای منحصربه‌فرد است: موج‌نمای سنگی (Zorats Karer) که به «کاراهونج ارمنستان» معروف است. این مجموعه سنگی باستانی شبیه استون‌هنج انگلیس است و قدمت آن به ۷۵۰۰ سال پیش می‌رسد. سیسیان برای علاقه‌مندان به باستان‌شناسی و طبیعت بکر مقصدی جالب است.</p>
+
+      <h2 class="section-title mb-4 mt-10">آشتاراک</h2>
+      <p>آشتاراک در ۲۰ کیلومتری شمال ایروان، شهر کوچکی با کلیساهای باستانی است. کلیسای سورپ مارانایک (قرن پنجم) و کلیسای کیرانکی از جاذبه‌های اصلی هستند. آشتاراک با دره عمیق رود کاساغ و پل‌های باستانی، منظره‌ای زیبا ارائه می‌دهد. این شهر برای گشت نیم‌روزه از ایروان ایده‌آل است.</p>
+
+      <h2 class="section-title mb-4 mt-10">جرموک</h2>
+      <p>جرموک در ۱۷۰ کیلومتری ایروان، شهر تفریحی ارمنستان با چشمه‌های آب معدنی گرم است. این شهر با آبشار جرموک، پارک‌های سرسبز و هتل‌های اسپا، مقصدی برای استراحت و درمان است. آب معدنی جرموک در سراسر ارمنستان معروف است و در بطری‌های آن به فروش می‌رسد. جرموک در تابستان بهترین فصل خود را دارد.</p>
+
+      <h2 class="section-title mb-4 mt-10">جدول مقایسه شهرها</h2>
+      <div class="overflow-x-auto my-6">
+        <table class="w-full text-sm border border-border rounded-lg">
+          <thead class="bg-muted">
+            <tr><th class="p-3 text-right">شهر</th><th class="p-3 text-right">جمعیت</th><th class="p-3 text-right">فاصله از ایروان</th><th class="p-3 text-right">ویژگی</th><th class="p-3 text-right">بهترین فصل</th></tr>
+          </thead>
+          <tbody>
+            {cities.map((c) => (
+              <tr class="border-t border-border">
+                <td class="p-3 font-semibold text-foreground">{c.name}</td>
+                <td class="p-3">{c.pop}</td>
+                <td class="p-3">{c.dist}</td>
+                <td class="p-3">{c.desc}</td>
+                <td class="p-3">{c.best}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="section-title mb-4 mt-10">نکات سفر بین شهرها</h2>
+      <p>سفر بین شهرهای ارمنستان با خودرو خصوصی، اتوبوس یا مینی‌بوس امکان‌پذیر است. اتوبوس از ترمینال مرکزی ایروان (Kilikia Bus Station) حرکت می‌کند و قیمت بلیت بین ۱۰۰۰ تا ۳۵۰۰ درام است. کرایه خودرو خصوصی با راننده برای گشت یک‌روزه بین ۳۰۰۰۰ تا ۵۰۰۰۰ درام است. جاده‌های ارمنستان عموماً در شرایط خوبی هستند اما در زمستان برخی مسیرهای کوهستانی ممکن است برفی باشند. آکای تراول می‌تواند خودرو با راننده فارسی‌زبان برای گشت‌های بین‌شهری رزرو کند. برای اقامت در ایروان، [راهنمای هتل‌ها](/hotels) را ببینید و برای [تور مراسم خاص ارمنستان](/tours/special-ceremonies-armenia) که شامل گشت‌های بین‌شهری است تماس بگیرید.</p>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} pageUrl="/travel-guide/armenia-cities" />
+  <Cta compact />
+</Layout>

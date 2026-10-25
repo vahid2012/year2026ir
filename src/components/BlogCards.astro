@@ -1,0 +1,41 @@
+---
+import { BLOGS } from '@/lib/site';
+
+export interface Props {
+  currentSlug?: string;
+  limit?: number;
+}
+const { currentSlug, limit } = Astro.props;
+let list = BLOGS.filter((b) => b.slug !== currentSlug);
+if (limit) list = list.slice(0, limit);
+---
+
+<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  {
+    list.map((b) => (
+      <a href={`/blog/${b.slug}`} class="card-fa overflow-hidden group block">
+        <div class="aspect-[16/10] overflow-hidden">
+          <img
+            src={b.image}
+            alt={b.imageAlt}
+            width="940"
+            height="650"
+            loading="lazy"
+            decoding="async"
+            class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
+        <div class="p-5">
+          <div class="flex items-center gap-2 text-xs text-muted-foreground mb-2">
+            <span>{b.date}</span>
+            <span>•</span>
+            <span>{b.readTime}</span>
+          </div>
+          <h3 class="font-bold text-lg mb-2 group-hover:text-primary transition-colors">{b.title}</h3>
+          <p class="text-sm text-muted-foreground leading-7 line-clamp-3">{b.excerpt}</p>
+          <span class="mt-4 inline-block text-sm font-bold text-primary">ادامه مطلب ←</span>
+        </div>
+      </a>
+    ))
+  }
+</div>

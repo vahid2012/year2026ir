@@ -1,0 +1,150 @@
+---
+import '@/styles/globals.css';
+import Layout from '@/layouts/Layout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { TOURS, BLOGS, SITE, LINKS } from '@/lib/site';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Faq from '@/components/Faq.astro';
+import Cta from '@/components/Cta.astro';
+
+export async function getStaticPaths() {
+  const tours = await getCollection('tours');
+  return tours.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'tours'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const d = entry.data;
+const meta = TOURS.find((t) => t.slug === entry.slug);
+
+const tourLd = {
+  '@context': 'https://schema.org',
+  '@type': 'TouristTrip',
+  name: d.title,
+  description: d.description,
+  url: `${SITE.domain}/tours/${entry.slug}`,
+  image: d.image,
+  offers: d.price ? { '@type': 'Offer', priceCurrency: 'IRR', price: d.price, availability: 'https://schema.org/InStock' } : undefined,
+  provider: { '@type': 'TravelAgency', name: SITE.legalName, url: SITE.domain },
+};
+
+const breadLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'خانه', item: SITE.domain },
+    { '@type': 'ListItem', position: 2, name: 'تورها', item: `${SITE.domain}/tours` },
+    { '@type': 'ListItem', position: 3, name: d.title, item: `${SITE.domain}/tours/${entry.slug}` },
+  ],
+};
+---
+
+<Layout
+  title={d.title}
+  description={d.description}
+  canonical={`/tours/${entry.slug}`}
+  image={d.image}
+  type="article"
+  jsonLd={[tourLd, breadLd]}
+>
+  <Breadcrumbs items={[{ name: 'خانه', path: '/' }, { name: 'تورها', path: '/tours' }, { name: d.title }]} />
+
+  <article>
+    <!-- Hero -->
+    <section class="relative overflow-hidden">
+      <div class="absolute inset-0">
+        <img src={d.image} alt={d.imageAlt} width="940" height="650" class="h-full w-full object-cover" loading="eager" />
+        <div class="absolute inset-0 bg-gradient-to-t from-secondary/95 via-secondary/70 to-secondary/30"></div>
+      </div>
+      <div class="relative container-fa py-20 md:py-28 text-white">
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="rounded-full bg-primary px-3 py-1 text-sm font-bold">{d.season}</span>
+          <span class="rounded-full bg-white/20 px-3 py-1 text-sm">{d.eventDate}</span>
+          <span class="rounded-full bg-white/20 px-3 py-1 text-sm">{d.duration}</span>
+        </div>
+        <h1 class="text-3xl md:text-5xl font-extrabold mb-4 max-w-3xl">{d.title}</h1>
+        <p class="text-lg text-white/90 max-w-2xl leading-8">{d.excerpt}</p>
+      </div>
+    </section>
+
+    <!-- Quick CTA bar -->
+    <section class="border-b border-border bg-card">
+      <div class="container-fa py-4 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          {d.price && <span class="font-bold text-primary">{d.price}</span>}
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <a href={LINKS.whatsapp} target="_blank" rel="noopener" class="btn-primary-fa !py-2 !px-4 text-xs">رزرو در واتساپ</a>
+          <a href={LINKS.telegram} target="_blank" rel="noopener" class="btn-secondary-fa !py-2 !px-4 text-xs">تلگرام</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Body + sidebar -->
+    <div class="container-fa py-10 grid gap-10 lg:grid-cols-[1fr_300px]">
+      <div class="prose-fa max-w-none">
+        <Content />
+
+        <!-- Gallery -->
+        <section class="my-10">
+          <h2 class="section-title mb-5">گالری تصاویر</h2>
+          <div class="grid gap-4 sm:grid-cols-3">
+            {d.gallery.map((g) => (
+              <img src={g.src} alt={g.alt} width="940" height="650" loading="lazy" decoding="async" class="rounded-xl w-full h-48 object-cover" />
+            ))}
+          </div>
+        </section>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="space-y-6 lg:sticky lg:top-24 self-start">
+        <div class="card-fa p-5">
+          <h3 class="font-bold mb-3">جزئیات تور</h3>
+          <ul class="text-sm space-y-2 text-muted-foreground">
+            <li>فصل: <span class="text-foreground font-semibold">{d.season}</span></li>
+            <li>زمان رویداد: <span class="text-foreground font-semibold">{d.eventDate}</span></li>
+            <li>مدت: <span class="text-foreground font-semibold">{d.duration}</span></li>
+            {d.price && <li>قیمت: <span class="text-primary font-bold">{d.price}</span></li>}
+          </ul>
+          <a href={LINKS.whatsapp} target="_blank" rel="noopener" class="btn-primary-fa w-full mt-4">رزرو تور</a>
+        </div>
+
+        {meta && d.relatedTours.length > 0 && (
+          <div class="card-fa p-5">
+            <h3 class="font-bold mb-3">تورهای مرتبط</h3>
+            <ul class="text-sm space-y-2">
+              {d.relatedTours.map((slug) => {
+                const t = TOURS.find((x) => x.slug === slug);
+                return t && <li><a href={`/tours/${t.slug}`} class="link-fa">{t.shortTitle}</a></li>;
+              })}
+            </ul>
+          </div>
+        )}
+
+        {meta && d.relatedBlogs.length > 0 && (
+          <div class="card-fa p-5">
+            <h3 class="font-bold mb-3">راهنمای مرتبط</h3>
+            <ul class="text-sm space-y-2">
+              {d.relatedBlogs.map((slug) => {
+                const b = BLOGS.find((x) => x.slug === slug);
+                return b && <li><a href={`/blog/${b.slug}`} class="link-fa">{b.title}</a></li>;
+              })}
+            </ul>
+          </div>
+        )}
+      </aside>
+    </div>
+
+    <!-- FAQ -->
+    <Faq faqs={d.faqs} pageUrl={`/tours/${entry.slug}`} />
+  </article>
+
+  <Cta compact />
+</Layout>

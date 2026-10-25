@@ -1,0 +1,66 @@
+---
+import { SITE, NAV, LINKS } from '@/lib/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-secondary text-secondary-foreground mt-16">
+  <div class="container-fa py-12 grid gap-10 md:grid-cols-4">
+    <div class="md:col-span-1">
+      <div class="flex items-center gap-2 font-extrabold text-lg mb-3">
+        <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground">آ</span>
+        <span>{SITE.name}</span>
+      </div>
+      <p class="text-sm leading-7 text-secondary-foreground/85">
+        آژانس گردشگری آکای تراول، متخصص تورهای رویدادهای ویژه ارمنستان و سفرهای فرهنگی ایروان.
+      </p>
+    </div>
+
+    <div>
+      <h3 class="font-bold mb-4">دسترسی سریع</h3>
+      <ul class="space-y-2 text-sm">
+        {NAV.map((n) => (
+          <li><a class="hover:text-accent transition-colors" href={n.href}>{n.label}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="font-bold mb-4">تماس با ما</h3>
+      <ul class="space-y-3 text-sm">
+        <li class="flex items-center gap-2">
+          <span class="opacity-70">تلفن ثابت:</span>
+          <a href={LINKS.phoneCall} dir="ltr" class="font-semibold hover:text-accent">{SITE.phone}</a>
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="opacity-70">موبایل:</span>
+          <a href={LINKS.mobileCall} dir="ltr" class="font-semibold hover:text-accent">0{SITE.mobile}</a>
+        </li>
+        <li>
+          <a href={LINKS.email} class="hover:text-accent">{SITE.email}</a>
+        </li>
+        <li class="text-secondary-foreground/85">{SITE.address}</li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="font-bold mb-4">شبکه‌های اجتماعی</h3>
+      <div class="flex flex-col gap-3 text-sm">
+        <a href={LINKS.whatsapp} target="_blank" rel="noopener" class="hover:text-accent">واتساپ: 0{SITE.mobile}</a>
+        <a href={LINKS.telegram} target="_blank" rel="noopener" class="hover:text-accent">تلگرام: 0{SITE.mobile}</a>
+        <a href={SITE.instagramUrl} target="_blank" rel="noopener" class="hover:text-accent">اینستاگرام: {SITE.instagram}</a>
+      </div>
+      <h3 class="font-bold mb-4 mt-6">همکاری با ما</h3>
+      <div class="flex flex-col gap-3 text-sm">
+        <a href="/careers" class="hover:text-accent">فارسی</a>
+        <a href="/en/careers" class="hover:text-accent">English</a>
+        <a href="/hy/careers" class="hover:text-accent">Հայերեն</a>
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-secondary-foreground/15">
+    <div class="container-fa py-4 text-xs text-secondary-foreground/70 flex flex-col md:flex-row items-center justify-between gap-2">
+      <p>© {year} {SITE.legalName}. تمامی حقوق محفوظ است.</p>
+      <p>طراحی و اجرای فنی برای سفرهای ایرانیان به ارمنستان.</p>
+    </div>
+  </div>
+</footer>

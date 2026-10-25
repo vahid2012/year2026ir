@@ -1,0 +1,76 @@
+---
+import '@/styles/globals.css';
+import Layout from '@/layouts/Layout.astro';
+import { TOURS, SITE, LINKS } from '@/lib/site';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Cta from '@/components/Cta.astro';
+
+const aboutLd = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: `درباره ${SITE.name}`,
+  url: `${SITE.domain}/about`,
+};
+
+const externalLink = {
+  anchor: 'تور ارمنستان از ارومیه',
+  url: 'https://tourviza.ir/%D8%AA%D9%88%D8%B1-%D8%A7%D8%B1%D9%85%D9%86%D8%B3%D8%AA%D8%A7%D9%86-%D8%A7%D8%B2-%D8%A7%D8%B1%D9%88%D9%85%DB%8C%D9%87/',
+};
+---
+
+<Layout
+  title="درباره آکای تراول"
+  description="آکای تراول آژانس گردشگری متخصص تورهای رویدادهای ویژه ارمنستان. با سال‌ها تجربه، راهنمای فارسی‌زبان و رزرو کامل، سفری بی‌دردسر به ارمنستان."
+  canonical="/about"
+  jsonLd={aboutLd}
+>
+  <Breadcrumbs items={[{ name: 'خانه', path: '/' }, { name: 'درباره ما' }]} />
+
+  <section class="container-fa py-12">
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-6">درباره آکای تراول</h1>
+    <div class="grid gap-8 md:grid-cols-2 items-center mb-10">
+      <div class="rounded-2xl overflow-hidden shadow-xl">
+        <img src="https://images.pexels.com/photos/15338719/pexels-photo-15338719.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="کلیسای تاریخی ارمنستان در منظر کوهستانی" width="940" height="650" class="h-full w-full object-cover" loading="lazy" />
+      </div>
+      <div class="prose-fa text-muted-foreground leading-8">
+        <p>
+          آژانس گردشگری آکای تراول با سال‌ها تجربه در زمینه تورهای ارمنستان، متخصص رویدادهای ویژه این کشور است. ما به این باور رسیده‌ایم که سفر به ارمنستان تنها بازدید از جاذبه‌ها نیست؛ بلکه تجربه‌ی فرهنگ، آیین‌ها و شادی‌های این کشور باستانی است. به همین دلیل تورهای ما حول رویدادهای ویژه مانند کریسمس حواریون، جشنواره وارداوار، هالووین و جشنواره بادکنک طراحی شده‌اند.
+        </p>
+        <p>
+          دفتر مرکزی ما در ارومیه قرار دارد و تیمی از کارشناسان مجرب در زمینه تورهای ارمنستان، آماده‌ی پاسخ‌گویی به سوالات شما و طراحی بهترین برنامه سفر است. ما با شبکه‌ای از هتل‌ها، راهنمایان محلی و شرکای حمل‌ونقل در ایروان همکاری می‌کنیم تا سفری بی‌دردسر و پر از خاطره برای شما بسازیم.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-3 mb-12">
+      <div class="card-fa p-6">
+        <div class="text-primary text-2xl font-extrabold mb-2">۱۰۰+</div>
+        <h3 class="font-bold mb-2">تور موفق</h3>
+        <p class="text-sm text-muted-foreground leading-7">بیش از ۱۰۰ تور موفق به ارمنستان با رضایت کامل مسافران.</p>
+      </div>
+      <div class="card-fa p-6">
+        <div class="text-primary text-2xl font-extrabold mb-2">۶+</div>
+        <h3 class="font-bold mb-2">رویداد ویژه</h3>
+        <p class="text-sm text-muted-foreground leading-7">تورهای ویژه برای ۶ رویداد فرهنگی و مذهبی ارمنستان.</p>
+      </div>
+      <div class="card-fa p-6">
+        <div class="text-primary text-2xl font-extrabold mb-2">۲۴/۷</div>
+        <h3 class="font-bold mb-2">پشتیبانی</h3>
+        <p class="text-sm text-muted-foreground leading-7">پشتیبانی ۲۴ ساعته در طول سفر با راهنمای فارسی‌زبان.</p>
+      </div>
+    </div>
+
+    <div class="prose-fa max-w-3xl text-muted-foreground leading-8 mb-10">
+      <h2 class="section-title mb-4">ماموریت ما</h2>
+      <p>
+        ماموریت آکای تراول این است که هر مسافر ایرانی تجربه‌ی واقعی از فرهنگ و آیین‌های ارمنستان داشته باشد. ما تورهایمان را نه فقط بر اساس جاذبه‌های توریستی، بلکه بر اساس تجربه‌ی واقعی یک ایرانی در ایروان طراحی می‌کنیم. راهنمای فارسی‌زبان همراه شماست و همه‌چیز از پرواز تا هتل و بلیت رویدادها از قبل رزرو می‌شود. اگر به دنبال مرجعی برای تورهای ارمنستان از شهر خود هستید، <a href={externalLink.url} target="_blank" rel="noopener nofollow">{externalLink.anchor}</a> راهنمای کاملی است.
+      </p>
+      <h2 class="section-title mb-4 mt-10">تماس با ما</h2>
+      <p>
+        برای رزرو تور یا مشاوره با کارشناسان آکای تراول، با شماره موبایل <a href={LINKS.whatsapp} target="_blank" rel="noopener" class="link-fa">۰۹۱۴۳۴۰۳۴۳۱</a> در واتساپ یا تلگرام تماس بگیرید. تلفن ثابت ۰۴۴۳۳۴۶۵۵۲۴ در ساعات اداری پاسخ‌گوی شماست. آدرس دفتر: {SITE.address}.
+      </p>
+    </div>
+  </section>
+
+  <Cta compact />
+</Layout>

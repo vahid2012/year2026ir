@@ -1,0 +1,41 @@
+---
+import '@/styles/globals.css';
+import Layout from '@/layouts/Layout.astro';
+import { BLOGS, SITE } from '@/lib/site';
+import BlogCards from '@/components/BlogCards.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Cta from '@/components/Cta.astro';
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'راهنمای سفر به ارمنستان',
+  url: `${SITE.domain}/blog`,
+  inLanguage: 'fa-IR',
+  blogPost: BLOGS.map((b) => ({
+    '@type': 'BlogPosting',
+    headline: b.title,
+    url: `${SITE.domain}/blog/${b.slug}`,
+    datePublished: b.publishDate,
+  })),
+};
+---
+
+<Layout
+  title="راهنمای سفر به ارمنستان"
+  description="راهنمای کامل سفر به ارمنستان؛ بهترین زمان سفر، جشنواره‌ها، مراعات خاص و نکات کاربردی برای توریست‌های ایرانی."
+  canonical="/blog"
+  jsonLd={ld}
+>
+  <Breadcrumbs items={[{ name: 'خانه', path: '/' }, { name: 'راهنمای سفر' }]} />
+
+  <section class="container-fa py-10">
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-5">راهنمای سفر به ارمنستان</h1>
+    <p class="text-muted-foreground leading-8 max-w-3xl mb-10">
+      مقالات کامل آکای تراول برای سفر به ارمنستان؛ از انتخاب بهترین زمان تا راهنمای جشنواره‌ها و مراعات خاص. اگر به دنبال تور واقعی هستید، [تورهای ارمنستان](/tours) ما را ببینید.
+    </p>
+    <BlogCards />
+  </section>
+
+  <Cta compact />
+</Layout>

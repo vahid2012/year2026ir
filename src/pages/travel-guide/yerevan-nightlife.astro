@@ -1,0 +1,88 @@
+---
+import '@/styles/globals.css';
+import Layout from '@/layouts/Layout.astro';
+import { SITE } from '@/lib/site';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Faq from '@/components/Faq.astro';
+import Cta from '@/components/Cta.astro';
+
+const faqs = [
+  { q: 'آیا دیسکوهای ایروان برای مسافران ایرانی ایمن هستند؟', a: 'بله، باشگاه‌های ایروان عموماً ایمن هستند اما مانند هر شهر بزرگ، احتیاط لازم است. در باشگاه‌های معروف مانند پلیگراف و کالومت امنیت خوبی برقرار است. همراه داشتن پاسپورت و اجاره تاکسی برای بازگشت به هتل توصیه می‌شود.' },
+  { q: 'سن ورود به باشگاه‌های ایروان چقدر است؟', a: 'حداقل سن ورود به بیشتر باشگاه‌های ایروان ۱۸ سال و در برخی ۲۱ سال است. کارت شناسایی ممکن است در ورودی درخواست شود.' },
+  { q: 'آیا رزرو میز در باشگاه‌های ایروان لازم است؟', a: 'در شب‌های آخر هفته و رویدادهای ویژه مانند هالووین، رزرو میز ضروری است. در شب‌های وسط هفته معمولاً بدون رزرو می‌توان وارد شد.' },
+];
+
+const articleLd = { '@context': 'https://schema.org', '@type': 'Article', headline: 'دیسکوها و زندگی شبانه ایروان', description: 'راهنمای باشگاه‌ها و دیسکوهای واقعی ایروان؛ پلیگراف، کالومت، پاپاراتزی، کامل، استپ، لجند و بیتلز.', url: `${SITE.domain}/travel-guide/yerevan-nightlife`, inLanguage: 'fa-IR', author: { '@type': 'Organization', name: SITE.legalName }, publisher: { '@type': 'Organization', name: SITE.legalName } };
+const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', url: `${SITE.domain}/travel-guide/yerevan-nightlife`, mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
+const breadLd = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'خانه', item: SITE.domain }, { '@type': 'ListItem', position: 2, name: 'راهنمای سفر', item: `${SITE.domain}/travel-guide` }, { '@type': 'ListItem', position: 3, name: 'دیسکوهای ایروان', item: `${SITE.domain}/travel-guide/yerevan-nightlife` }] };
+---
+
+<Layout
+  title="دیسکوها و زندگی شبانه ایروان | راهنمای سفر"
+  description="راهنمای باشگاه‌ها و دیسکوهای واقعی ایروان؛ پلیگراف، کالومت، پاپاراتزی، کامل، استپ، لجند، بیتلز کلاب + نکات ایمنی، رزرو و قیمت."
+  canonical="/travel-guide/yerevan-nightlife"
+  image="https://images.pexels.com/photos/5143168/pexels-photo-5143168.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+  type="article"
+  jsonLd={[articleLd, faqLd, breadLd]}
+>
+  <Breadcrumbs items={[{ name: 'خانه', path: '/' }, { name: 'راهنمای سفر', path: '/travel-guide' }, { name: 'دیسکوهای ایروان' }]} />
+
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="https://images.pexels.com/photos/5143168/pexels-photo-5143168.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="باشگاه شبانه با نورپردازی نئونی در ایروان" width="940" height="650" class="h-full w-full object-cover" loading="eager" />
+      <div class="absolute inset-0 bg-gradient-to-t from-secondary/95 via-secondary/70 to-secondary/30"></div>
+    </div>
+    <div class="relative container-fa py-20 md:py-28 text-white">
+      <h1 class="text-3xl md:text-5xl font-extrabold mb-4 max-w-3xl">دیسکوها و زندگی شبانه ایروان</h1>
+      <p class="text-lg text-white/90 max-w-2xl leading-8">راهنمای باشگاه‌ها و دیسکوهای واقعی ایروان؛ از پلیگراف و کالومت تا لجند و بیتلز کلاب با نکات ایمنی، رزرو و قیمت.</p>
+    </div>
+  </section>
+
+  <section class="container-fa py-10">
+    <div class="prose-fa max-w-none text-muted-foreground leading-8">
+      <p>ایروان پس از غروب آفتاب به شهری پرشور و زنده تبدیل می‌شود. زندگی شبانه ایروان با باشگاه‌های متنوع، بارهای راک، پاب‌های سنتی و کافه‌های شبانه، تجربه‌ای متفاوت از روزهای فرهنگی شهر ارائه می‌دهد. در این راهنما، باشگاه‌ها و دیسکوهای واقعی ایروان را معرفی می‌کنیم و نکات ایمنی، رزرو و قیمت را برای مسافران ایرانی توضیح می‌دهیم. اگر به دنبال تور شب‌های پرشور هستید، [تور هالووین ایروان](/tours/halloween-armenia-yerevan) شما را به قلب زندگی شبانه شهر می‌برد.</p>
+
+      <h2 class="section-title mb-4 mt-10">باشگاه پلیگراف (Poligraf)</h2>
+      <p>پلیگراف یکی از محبوب‌ترین باشگاه‌های ایروان است که در خیابان تومانیان قرار دارد. این باشگاه با موسیقی الکترونیک، هاوس و دیپ‌هاوس، جوانان ایروان و توریست‌ها را جذب می‌کند. دی‌جی‌های محلی و بین‌المللی در پلیگراف برنامه اجرا می‌کنند. محیط باشگاه صنعتی با آجرهای نمایان و نورپردازی نئونی است. ورودی ۳۰۰۰ تا ۵۰۰۰ درام (۳۰ تا ۵۰ هزار تومان) و در شب‌های ویژه تا ۱۰۰۰۰ درام است. ساعت کار از ۱۱ شب تا ۵ صبح است.</p>
+
+      <div class="my-8 rounded-2xl overflow-hidden shadow-xl">
+        <img src="https://images.pexels.com/photos/2119700/pexels-photo-2119700.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="باشگاه شبانه با دی‌جی و نورپردازی رنگی" width="940" height="650" class="w-full h-64 object-cover" loading="lazy" />
+      </div>
+
+      <h2 class="section-title mb-4 mt-10">باشگاه کالومت (Calumet)</h2>
+      <p>کالومت در مرکز ایروان یکی از باشگاه‌های باسابقه شهر است. این باشگاه با موسیقی پاپ، رقص و رترو، فضایی شاد و دوستانه دارد. محیط باشگاه با دکوراسیون کلاسیک و بار چوبی، حس آرامش و شکوه را منتقل می‌کند. کالومت برای مسافرانی که به دنبال شب‌های آرام‌تر با موسیقی آشنا هستند مناسب است. ورودی ۲۵۰۰ تا ۴۰۰۰ درام و رزرو میز در آخر هفته توصیه می‌شود.</p>
+
+      <h2 class="section-title mb-4 mt-10">باشگاه پاپاراتزی (Paparazzi)</h2>
+      <p>پاپاراتزی یکی از باشگاه‌های مدرن ایروان است که در منطقه کنترون قرار دارد. این باشگاه با موسیقی تجاری، پاپ و رقص، جمعیت زیادی را جذب می‌کند. محیط باشگاه با نورپردازی مدرن، سیستم صوتی قدرتمند و صحنه رقص وسیع، شب‌های پرشوری ارائه می‌دهد. پاپاراتزی برای شب‌های هالووین و سال نو برنامه‌های ویژه دارد. ورودی ۳۰۰۰ تا ۶۰۰۰ درام و در شب‌های ویژه بالاتر است.</p>
+
+      <div class="my-8 rounded-2xl overflow-hidden shadow-xl">
+        <img src="https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="مجموعه رقص در باشگاه با نورهای رنگی" width="940" height="650" class="w-full h-64 object-cover" loading="lazy" />
+      </div>
+
+      <h2 class="section-title mb-4 mt-10">باشگاه کامل (Kami)</h2>
+      <p>کامی باشگاهی است که موسیقی متنوع از رقص تجاری تا هاوس ارائه می‌دهد. این باشگاه در نزدیکی میدان جمهوریه قرار دارد و دسترسی آسانی از هتل‌های مرکزی دارد. محیط باشگاه با دیوارهای آینه‌ای و نورپردازی LED، فضایی مدرن و شیک می‌سازد. کامی برای مسافرانی که در [هتل ماریوت](/hotels/armenia-marriott-yerevan) یا [هتل هالیدی‌این](/hotels/holiday-inn-yerevan-republic-square) اقامت دارند، در فاصله پیاده‌روی قرار دارد.</p>
+
+      <h2 class="section-title mb-4 mt-10">باشگاه استپ (Stop)</h2>
+      <p>استپ یکی از باشگاه‌های قدیمی‌تر ایروان است که با موسیقی رترو، دیسکو و پاپ، جمعیتی متنوع را جذب می‌کند. این باشگاه فضایی آرام‌تر از باشگاه‌های الکترونیک دارد و برای مسافرانی که به دنبال شب‌های کم‌هیاهو هستند مناسب است. استپ در خیابان آبوویان قرار دارد و از [هتل گرند ایروان](/hotels/grand-hotel-yerevan) در فاصله کوتاهی است. ورودی ۲۰۰۰ تا ۳۵۰۰ درام است.</p>
+
+      <div class="my-8 rounded-2xl overflow-hidden shadow-xl">
+        <img src="https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="بار شبانه با موسیقی زنده و فضای دنج" width="940" height="650" class="w-full h-64 object-cover" loading="lazy" />
+      </div>
+
+      <h2 class="section-title mb-4 mt-10">لجند پاب (Legend Pub)</h2>
+      <p>لجند پاب یکی از محبوب‌ترین پاب‌های ایروان است که با موسیقی زنده راک و پاپ، جمعیتی دوستانه را جذب می‌کند. این پاب با فضای دنج، آبجوهای متنوع و غذاهای سبک، مکانی مناسب برای شروع شب است. لجند پاب در خیابان تومانیان قرار دارد و در [راهنمای خیابان‌های ایروان](/travel-guide/yerevan-streets) معرفی شده است. ورودی رایگان و حداقل مصرف ۲۰۰۰ درام است.</p>
+
+      <h2 class="section-title mb-4 mt-10">بیتلز کلاب (Beatles Club)</h2>
+      <p>بیتلز کلاب باشگاهی است که منحصراً به موسیقی گروه بیتلز اختصاص دارد. این کلاب با دکوراسیون دهه ۱۹۶۰، پوسترهای بیتلز و موسیقی زنده، تجربه‌ای نوستالژیک ارائه می‌دهد. بیتلز کلاب برای مسافرانی که به موسیقی کلاسیک راک علاقه دارند، مقصدی بی‌نظیر است. کلاب در مرکز ایروان قرار دارد و ورودی ۲۵۰۰ تا ۴۰۰۰ درام است.</p>
+
+      <h2 class="section-title mb-4 mt-10">نکات ایمنی در باشگاه‌های ایروان</h2>
+      <p>باشگاه‌های ایروان عموماً ایمن هستند اما احتیاط اولیه لازم است. همراه داشتن پاسپورت در ورودی ممکن است درخواست شود. نوشیدنی‌های خود را همیشه در دید داشته باشید و از پذیرفتن نوشیدنی از غریبه‌ها خودداری کنید. برای بازگشت به هتل از تاکسی‌های رسمی یا اپلیکیشن Yandex Go استفاده کنید. در شب‌های آخر هفته و رویدادهای ویژه، باشگاه‌ها شلوغ‌تر هستند و رزرو میز توصیه می‌شود.</p>
+
+      <h2 class="section-title mb-4 mt-10">رزرو و قیمت</h2>
+      <p>رزرو میز در باشگاه‌های ایروان از طریق تلفن یا صفحات اینستاگرام باشگاه‌ها امکان‌پذیر است. قیمت میز VIP از ۲۰۰۰۰ تا ۵۰۰۰۰ درام (۲۰۰ تا ۵۰۰ هزار تومان) متغیر است. ورودی معمولی بین ۲۵۰۰ تا ۶۰۰۰ درام است. در شب‌های هالووین، سال نو و جشنواره‌ها، قیمت‌ها بالاتر و رزرو ضروری است. [تور هالووین ایروان](/tours/halloween-armenia-yerevan) شامل رزرو میز در باشگاه‌های منتخب است. برای رزرو هتل نزدیک باشگاه‌ها، [هتل دبل‌تری هیلتون](/hotels/doubletree-by-hilton-yerevan) و [هتل گرند ایروان](/hotels/grand-hotel-yerevan) پیشنهاد می‌شوند. برای اطلاعات بیشتر درباره جاذبه‌های روزانه، [راهنمای جاذبه‌های ایروان](/travel-guide/yerevan-attractions) را ببینید.</p>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} pageUrl="/travel-guide/yerevan-nightlife" />
+  <Cta compact />
+</Layout>
