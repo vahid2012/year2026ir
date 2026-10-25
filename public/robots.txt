@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://year2026.ir/sitemap-index.xml
